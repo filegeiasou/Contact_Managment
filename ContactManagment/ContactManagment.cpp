@@ -6,7 +6,7 @@ using namespace std;
 int main()
 {
     list <Contact* > a,b;
-    int flag = 0 , fg =1;
+    int flag = 0 , fg =1 ,flag3=0;
     cout << "Contact Managment!" << endl;
     while (flag != 5)
     {
@@ -27,50 +27,50 @@ int main()
             cout << "Do you want to add more informations ? [Y/N]" << endl;
             char epil;
             cin >> epil;
-            if (epil == 'Y' || epil == 'y')
-            {
-                string company;
-                cout << "Give a company name : " << endl;
-                cin >> company;
-                string email;
-                cout << "Give a email : " << endl;
-                cin>> email;
-                /*ifstream fp1;
-                fp1.open("contacts.txt");
-                char* name2 = new char[50];
-                char* surname2 = new char[50];
-                char* phone2 = new char[10];
-                string company2;
-                string email2;
-                const char* pr = "";
-                while (!fp1.eof())
+            ifstream fp2;
+                fp2.open("contacts.txt");
+                char* name3 = new char[50];
+                while (!fp2.eof())
                 {
-                    fp1.getline(name2, 50);
-                    fp1.getline(surname2, 50);
-                    fp1.getline(phone2, 50);
-                    getline(fp1, company2);
-                    getline(fp1, email2);
-                    if (strcmp(name, name2) != 0)
+                    fp2.getline(name3, 50);
+                    if (strcmp(name, name3) == 0)
                     {
-                        Contact* contact1 = new Contact(name, surname, company, phone, email);
-                        a.push_back(contact1);
+                        flag3 = 1;
+                        break;
                     }
                 }
-                fp1.close();*/
-                Contact* contact1 = new Contact(name, surname, company, phone, email);
-                b.push_back(contact1);// put a
-            }
-            else
-            {
-                Contact *contact2 = new Contact(name, surname, phone);
-                b.push_back(contact2); // put a
-            }
-            cout << "You create a contact " << endl;
+                if (flag3 == 0)
+                {
+                    if (epil == 'Y' || epil == 'y')
+                    {
+                        string company;
+                        cout << "Give a company name : " << endl;
+                        cin >> company;
+                        string email;
+                        cout << "Give a email : " << endl;
+                        cin >> email;
+                        Contact* contact1 = new Contact(name, surname, company, phone, email);
+                        b.push_back(contact1);
+                        cout << "You create a contact " << endl;
+                        
+                    }
+                    else
+                    {
+                        Contact* contact2 = new Contact(name, surname, phone);
+                        cout << "You create a contact " << endl;
+                        b.push_back(contact2);
+                    }
+                }
+                else
+                {
+                    cout << "The contact has already exists" << endl;
+                }
+            fp2.close();
         }
         else if (flag == 2)
         {
             list<Contact * >::iterator it;
-            for (it = b.begin(); it != b.end(); ++it)// put a
+            for (it = b.begin(); it != b.end(); ++it)
             {
                 (**it).display();
                 cout << "-------" << endl;
@@ -95,7 +95,6 @@ int main()
         }
         else if (flag == 4)
         {
-            //a.clear();
             if (fg == 1)
             {
                 ifstream fp;

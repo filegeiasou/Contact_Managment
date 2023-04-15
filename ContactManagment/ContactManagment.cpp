@@ -51,14 +51,15 @@ int main()
                         cin >> email;
                         Contact* contact1 = new Contact(name, surname, company, phone, email);
                         b.push_back(contact1);
-                        cout << "You create a contact " << endl;
-                        
+                        a.splice(a.end(), b);
+                        cout << "You create a contact " << endl;           
                     }
                     else
                     {
                         Contact* contact2 = new Contact(name, surname, phone);
                         cout << "You create a contact " << endl;
                         b.push_back(contact2);
+                        a.splice(a.end(), b);
                     }
                 }
                 else
@@ -121,7 +122,7 @@ int main()
                 fg = 0;
                 fp.close();
             }
-            a.splice(a.end(), b);
+            //a.splice(a.end(), b);
             list<Contact* >::iterator it;
             for (it = a.begin(); it != a.end(); ++it)
             {

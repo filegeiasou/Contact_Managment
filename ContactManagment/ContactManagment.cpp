@@ -1,4 +1,5 @@
 #include "Contact.h"
+#include <fstream>
 #include <vector>
 #include <list>
 using namespace std;
@@ -7,11 +8,10 @@ int main()
     list <Contact* > a;
     int flag = 0;
     cout << "Contact Managment!" << endl;
-    int count = 0;
-    while (flag != 4)
+    while (flag != 5)
     {
         cout << "Select what you want " << endl;
-        cout << "1)Create contact  2)See contact 3)Delete contact  4)Exit" << endl;
+        cout << "1)Create contact  2)See now list contacts 3)Delete contact 4)See all contacts  5)Exit" << endl;
         cin >> flag;
         if (flag == 1)
         {
@@ -37,15 +37,11 @@ int main()
                 cin>> email;
                 Contact *contact1=new Contact(name, surname,company, phone,email);
                 a.push_back(contact1);
-                count++;
             }
             else
             {
                 Contact *contact2 = new Contact(name, surname, phone);
                 a.push_back(contact2);
-               /* char* pr = (*contact2).getname();
-                cout << *pr << endl;*/
-                count++;
             }
             cout << "You create a contact " << endl;
         }
@@ -75,8 +71,29 @@ int main()
             }
             cout << "You delete a contact " << endl;
         }
-        else if (flag == 4)
+        else if (flag == 4)//create this to take lines to do list
         {
+            ifstream fp;
+            fp.open("contacts.txt");
+            string line;
+            while (getline(fp, line))
+            {
+                cout << line << endl;
+            }
+
+            fp.close();
+        }
+        else if (flag ==  5)
+        {
+            fstream fp;
+            fp.open("contacts.txt",ios::app);
+            list<Contact* >::iterator it;
+            for (it = a.begin(); it != a.end(); ++it)
+            {
+                fp << **it;
+                fp << "-------" << endl;
+            }
+            fp.close();
             cout << "See you soon!" << endl;
         }
 

@@ -18,6 +18,7 @@ class Contact
 		{
 			return this->first_name;
 		}
+		void display();
 		~Contact();
 };
 

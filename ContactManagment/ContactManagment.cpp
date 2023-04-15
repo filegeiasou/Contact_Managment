@@ -50,7 +50,7 @@ int main()
             list<Contact * >::iterator it;
             for (it = a.begin(); it != a.end(); ++it)
             {
-                cout << **it;
+                (**it).display();
                 cout << "-------" << endl;
             }
         }
@@ -75,23 +75,37 @@ int main()
         {
             ifstream fp;
             fp.open("contacts.txt");
-            string line;
-            while (getline(fp, line))
+            char* name2 = new char[50];
+            char* surname2 = new char[50];
+            char* phone2 = new char[10];
+            string company2;
+            string email2;
+            while (!fp.eof())
             {
-                cout << line << endl;
+                fp.getline(name2,50);
+                fp.getline(surname2, 50);
+                fp.getline(phone2, 50);
+                getline(fp, company2);
+                getline(fp, email2);
+                Contact *contact3=new Contact(name2, surname2, company2, phone2, email2);
+                a.push_back(contact3);
             }
-
+            list<Contact* >::iterator it;
+            for (it = a.begin(); it != a.end(); ++it)
+            {
+                (**it).display();
+                cout << "-------" << endl;
+            }
             fp.close();
         }
         else if (flag ==  5)
         {
             fstream fp;
-            fp.open("contacts.txt",ios::app);
+            fp.open("contacts.txt");
             list<Contact* >::iterator it;
             for (it = a.begin(); it != a.end(); ++it)
             {
                 fp << **it;
-                fp << "-------" << endl;
             }
             fp.close();
             cout << "See you soon!" << endl;

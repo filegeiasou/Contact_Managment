@@ -32,10 +32,19 @@ Contact::~Contact()
 
 ostream& operator <<(ostream& out, const Contact& a)
 {
-	out << "First name : " << a.first_name << endl;
-	out << "Surname : " << a.surname << endl;
-	out << "Phone :" << a.phone << endl;
-	out << "Company : " << a.company << endl;
-	out << "Email : " << a.email << endl;
+	out << a.first_name << endl;
+	out << a.surname << endl;
+	out << a.phone << endl;
+	out << a.company << endl;
+	out << a.email << endl;
 	return out;
+}
+
+void Contact::display()
+{
+	cout << "First name : " << this->first_name << endl;
+	cout << "Surname : " << this->surname << endl;
+	cout << "Phone :" << this->phone << endl;
+	cout << "Company : " << this->company << endl;
+	cout << "Email : " << this->email << endl;
 }

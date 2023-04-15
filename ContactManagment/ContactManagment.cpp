@@ -5,7 +5,7 @@
 using namespace std;
 int main()
 {
-    list <Contact* > a;
+    list <Contact* > a,b;
     int flag = 0;
     cout << "Contact Managment!" << endl;
     while (flag != 5)
@@ -35,20 +35,42 @@ int main()
                 string email;
                 cout << "Give a email : " << endl;
                 cin>> email;
-                Contact *contact1=new Contact(name, surname,company, phone,email);
-                a.push_back(contact1);
+                /*ifstream fp1;
+                fp1.open("contacts.txt");
+                char* name2 = new char[50];
+                char* surname2 = new char[50];
+                char* phone2 = new char[10];
+                string company2;
+                string email2;
+                const char* pr = "";
+                while (!fp1.eof())
+                {
+                    fp1.getline(name2, 50);
+                    fp1.getline(surname2, 50);
+                    fp1.getline(phone2, 50);
+                    getline(fp1, company2);
+                    getline(fp1, email2);
+                    if (strcmp(name, name2) != 0)
+                    {
+                        Contact* contact1 = new Contact(name, surname, company, phone, email);
+                        a.push_back(contact1);
+                    }
+                }
+                fp1.close();*/
+                Contact* contact1 = new Contact(name, surname, company, phone, email);
+                b.push_back(contact1);// put a
             }
             else
             {
                 Contact *contact2 = new Contact(name, surname, phone);
-                a.push_back(contact2);
+                b.push_back(contact2); // put a
             }
             cout << "You create a contact " << endl;
         }
         else if (flag == 2)
         {
             list<Contact * >::iterator it;
-            for (it = a.begin(); it != a.end(); ++it)
+            for (it = b.begin(); it != b.end(); ++it)// put a
             {
                 (**it).display();
                 cout << "-------" << endl;
@@ -71,8 +93,9 @@ int main()
             }
             cout << "You delete a contact " << endl;
         }
-        else if (flag == 4)//create this to take lines to do list
+        else if (flag == 4)
         {
+            a.clear();
             ifstream fp;
             fp.open("contacts.txt");
             char* name2 = new char[50];
@@ -80,6 +103,7 @@ int main()
             char* phone2 = new char[10];
             string company2;
             string email2;
+            const char* pr = "";
             while (!fp.eof())
             {
                 fp.getline(name2,50);
@@ -87,9 +111,13 @@ int main()
                 fp.getline(phone2, 50);
                 getline(fp, company2);
                 getline(fp, email2);
-                Contact *contact3=new Contact(name2, surname2, company2, phone2, email2);
-                a.push_back(contact3);
+                if (strcmp(pr, name2) != 0)
+                {
+                    Contact* contact3 = new Contact(name2, surname2, company2, phone2, email2);
+                    a.push_back(contact3);
+                }
             }
+            a.splice(a.end(), b);
             list<Contact* >::iterator it;
             for (it = a.begin(); it != a.end(); ++it)
             {
@@ -101,7 +129,7 @@ int main()
         else if (flag ==  5)
         {
             fstream fp;
-            fp.open("contacts.txt");
+            fp.open("contacts.txt",ios::out);
             list<Contact* >::iterator it;
             for (it = a.begin(); it != a.end(); ++it)
             {

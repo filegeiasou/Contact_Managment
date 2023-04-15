@@ -14,10 +14,7 @@ class Contact
 		Contact( char * ,  char * , string ,  char *  , string );
 		Contact( char* , char*,  char*);
 		friend ostream& operator << (ostream&, const Contact&);
-		char* getname()
-		{
-			return this->first_name;
-		}
+		char* getname();
 		void display();
 		~Contact();
 };

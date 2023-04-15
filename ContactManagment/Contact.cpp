@@ -48,3 +48,8 @@ void Contact::display()
 	cout << "Company : " << this->company << endl;
 	cout << "Email : " << this->email << endl;
 }
+
+char * Contact::getname()
+{
+	return this->first_name;
+}

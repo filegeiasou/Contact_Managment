@@ -6,7 +6,7 @@ using namespace std;
 int main()
 {
     list <Contact* > a,b;
-    int flag = 0;
+    int flag = 0 , fg =1;
     cout << "Contact Managment!" << endl;
     while (flag != 5)
     {
@@ -95,27 +95,32 @@ int main()
         }
         else if (flag == 4)
         {
-            a.clear();
-            ifstream fp;
-            fp.open("contacts.txt");
-            char* name2 = new char[50];
-            char* surname2 = new char[50];
-            char* phone2 = new char[10];
-            string company2;
-            string email2;
-            const char* pr = "";
-            while (!fp.eof())
+            //a.clear();
+            if (fg == 1)
             {
-                fp.getline(name2,50);
-                fp.getline(surname2, 50);
-                fp.getline(phone2, 50);
-                getline(fp, company2);
-                getline(fp, email2);
-                if (strcmp(pr, name2) != 0)
+                ifstream fp;
+                fp.open("contacts.txt");
+                char* name2 = new char[50];
+                char* surname2 = new char[50];
+                char* phone2 = new char[10];
+                string company2;
+                string email2;
+                const char* pr = "";
+                while (!fp.eof())
                 {
-                    Contact* contact3 = new Contact(name2, surname2, company2, phone2, email2);
-                    a.push_back(contact3);
+                    fp.getline(name2, 50);
+                    fp.getline(surname2, 50);
+                    fp.getline(phone2, 50);
+                    getline(fp, company2);
+                    getline(fp, email2);
+                    if (strcmp(pr, name2) != 0)
+                    {
+                        Contact* contact3 = new Contact(name2, surname2, company2, phone2, email2);
+                        a.push_back(contact3);
+                    }
                 }
+                fg = 0;
+                fp.close();
             }
             a.splice(a.end(), b);
             list<Contact* >::iterator it;
@@ -124,7 +129,6 @@ int main()
                 (**it).display();
                 cout << "-------" << endl;
             }
-            fp.close();
         }
         else if (flag ==  5)
         {

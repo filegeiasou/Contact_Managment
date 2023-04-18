@@ -23,6 +23,18 @@ Contact::Contact( char* first_name,  char* surname,  char* phone)
 	this->email = "None";
 }
 
+Contact::Contact(const Contact& a)
+{
+	this->first_name = new char[strlen(a.first_name) + 1];
+	this->surname = new char[strlen(a.surname) + 1];
+	this->phone = new char[strlen(a.phone) + 1];
+	strcpy_s(this->first_name, strlen(a.first_name) + 1, a.first_name);
+	strcpy_s(this->surname, strlen(a.surname) + 1, a.surname);
+	strcpy_s(this->phone, strlen(a.phone) + 1, a.phone);
+	this->company = a.company;
+	this->email = a.email;
+}
+
 Contact::~Contact()
 {
 	delete[] first_name;

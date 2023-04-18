@@ -93,7 +93,6 @@ int main()
         }
         else if (flag == 2)
         {
-            //a.splice(a.end(), b);
             list<Contact* >::iterator it;
             for (it = a.begin(); it != a.end(); ++it)
             {

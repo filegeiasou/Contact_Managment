@@ -3,3 +3,8 @@ money
 54
 None
 None
+mario
+alpo
+78
+None
+None

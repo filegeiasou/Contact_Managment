@@ -103,9 +103,12 @@ int main()
         }
         else if (flag == 2)
         {
+            int cnt = 0;
             list<Contact* >::iterator it;
             for (it = a.begin(); it != a.end(); ++it)
             {
+                cnt++;
+                cout << "Contact " << cnt << endl;
                 (**it).display();
                 cout << "-------" << endl;
             }

@@ -58,3 +58,43 @@ char* Contact::getsurname()
 {
 	return this->surname;
 }
+
+char* Contact::getphone()
+{
+	return this->phone;
+}
+
+void Contact::setname(char* name)
+{
+	strcpy_s(this->first_name, strlen(first_name) + 1, name);
+}
+
+void Contact::setsurname(char*surname)
+{
+	strcpy_s(this->surname, strlen(surname) + 1, surname);
+}
+
+void Contact::setphone(char*phone)
+{
+	strcpy_s(this->phone, strlen(phone) + 1, phone);
+}
+
+string Contact::getcompany()
+{
+	return this->company;
+}
+
+string Contact::getemail()
+{
+	return this->email;
+}
+
+void Contact::setcompany(string company)
+{
+	this->company = company;
+}
+
+void Contact::setemail(string email)
+{
+	this->email = email;
+}

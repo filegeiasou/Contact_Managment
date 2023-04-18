@@ -1,7 +1,4 @@
 #include "Contact.h"
-#include <fstream>
-#include <vector>
-#include <list>
 using namespace std;
 void save(list <Contact*> );
 void createlist(list <Contact*> *);

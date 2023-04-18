@@ -2,6 +2,8 @@
 #include <cstring>
 #include <iostream>
 #include <stdlib.h>
+#include <fstream>
+#include <list>
 using namespace std;
 class Contact
 {

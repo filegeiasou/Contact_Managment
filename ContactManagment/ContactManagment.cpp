@@ -1,10 +1,12 @@
 #include "Contact.h"
 using namespace std;
 void save(list <Contact*> );
+void display(list <Contact*>);
 void createlist(list <Contact*> *);
+void deleteCon(list <Contact*>*);
 int main()
 {
-    list <Contact* > a,b;
+    list <Contact* > a;
     int flag = 0 ,flag3=0;
     char* name = new char[50];
     char* name2 = new char[50];
@@ -55,15 +57,14 @@ int main()
                     cout << "Give a email : " << endl;
                     cin >> email;
                     Contact* contact1 = new Contact(name, surname, company, phone, email);
-                    a.push_back(contact1);
-                    cout << "You create a contact " << endl;           
+                    a.push_back(contact1);      
                 }
                 else
                 {
                     Contact* contact2 = new Contact(name, surname, phone);
-                    cout << "You create a contact " << endl;
                     a.push_back(contact2);
                 }
+                cout << "You create a contact " << endl;
                 save(a);
             }
             else
@@ -74,41 +75,11 @@ int main()
         }
         else if (flag == 3)
         {
-            int f = 0;
-            list<Contact* >::iterator it;
-            cout << "Give a name : " << endl;
-            cin >> name2;
-            cout << "Give a surname : " << endl;
-            cin >> surname2;
-            for (it = a.begin(); it != a.end(); ++it)
-            {
-                char* pr = (*it)->getname();
-                char* pr1 = (*it)->getsurname();
-                if (strcmp(pr, name2)==0 && strcmp(pr1,surname2)==0)
-                {
-                    cout << "You delete a contact " << endl;
-                    a.erase(it);
-                    f = 1;
-                    break;
-                }
-            }
-            save(a);
-            a.clear();
-            createlist(&a);
-            if (f == 0)
-                cout << "You can not delete this contact because it not exists" << endl;
+            deleteCon(&a);
         }
         else if (flag == 2)
         {
-            int cnt = 0;
-            list<Contact* >::iterator it;
-            for (it = a.begin(); it != a.end(); ++it)
-            {
-                cnt++;
-                cout << "Contact " << cnt << endl;
-                (**it).display();
-                cout << "-------" << endl;
-            }
+            display(a);
         }
         else if (flag ==  4)
         {
@@ -141,6 +112,19 @@ void save(list <Contact*> a)
     fp.close();
 }
 
+void display(list <Contact*> a)
+{
+    int cnt = 0;
+    list<Contact* >::iterator it;
+    for (it = a.begin(); it != a.end(); ++it)
+    {
+        cnt++;
+        cout << "Contact " << cnt << endl;
+        (**it).display();
+        cout << "-------" << endl;
+    }
+}
+
 void createlist(list <Contact*> *a)
 {
     ifstream fp;
@@ -168,4 +152,33 @@ void createlist(list <Contact*> *a)
     delete[] name2;
     delete[] surname2;
     delete[] phone2;
+}
+
+void deleteCon(list <Contact*> *a )
+{
+    int f = 0;
+    char* name2 = new char[50];
+    char* surname2 = new char[50];
+    list<Contact* >::iterator it;
+    cout << "Give a name : " << endl;
+    cin >> name2;
+    cout << "Give a surname : " << endl;
+    cin >> surname2;
+    for (it = (*a).begin(); it != (*a).end(); ++it)
+    {
+        char* pr = (*it)->getname();
+        char* pr1 = (*it)->getsurname();
+        if (strcmp(pr, name2) == 0 && strcmp(pr1, surname2) == 0)
+        {
+            cout << "You delete a contact " << endl;
+            (*a).erase(it);
+            f = 1;
+            break;
+        }
+    }
+    save(*a);
+    (*a).clear();
+    createlist(a);
+    if (f == 0)
+        cout << "You can not delete this contact because it not exists" << endl;
 }

@@ -4,7 +4,7 @@ void save(list <Contact*> );
 void display(list <Contact*>);
 void createlist(list <Contact*> *);
 void deleteCon(list <Contact*>*);
-void createAcc(list <Contact*>*);
+void createCon(list <Contact*>*);
 int main()
 {
     list <Contact* > a;
@@ -18,7 +18,7 @@ int main()
         cin >> flag;
         if (flag == 1)
         {
-            createAcc(&a);
+            createCon(&a);
         }
         else if (flag == 3)
         {
@@ -124,7 +124,7 @@ void deleteCon(list <Contact*> *a )
     delete[]name2;
     delete[]surname2;
 }
-void createAcc(list <Contact*> *a)
+void createCon(list <Contact*> *a)
 {
     int flag3 = 0;
     char* name = new char[50];

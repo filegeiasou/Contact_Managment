@@ -5,35 +5,39 @@ void display(list <Contact*>);
 void createlist(list <Contact*> *);
 void deleteCon(list <Contact*>*);
 void createCon(list <Contact*>*);
+void searchCon(list <Contact*>);
 int main()
 {
     list <Contact* > a;
     int flag = 0;
     cout << "Contact Managment!" << endl;
     createlist(&a);
-    while (flag != 4)
+    while (flag != 5)
     {
         cout << "Select what you want " << endl;
-        cout << "1)Create contact  2)See all contacts 3)Delete contact 4)Exit" << endl;
+        cout << "1)Create contact  2)See all contacts 3)Delete contact 4)Search Contact 5)Exit" << endl;
         cin >> flag;
         if (flag == 1)
         {
             createCon(&a);
         }
-        else if (flag == 3)
-        {
-            deleteCon(&a);
-        }
         else if (flag == 2)
         {
             display(a);
         }
-        else if (flag ==  4)
+        else if (flag == 3)
+        {
+            deleteCon(&a);
+        }
+        else if (flag == 4)
+        {
+            searchCon(a);
+        }
+        else if (flag == 5)
         {
             save(a);
             cout << "See you soon!" << endl;
         }
-
     }
     cout << "Bye" << endl;
     a.clear();
@@ -186,4 +190,33 @@ void createCon(list <Contact*> *a)
     delete[] name3;
     delete[] surname4;
     delete[] phone;
+}
+void searchCon(list <Contact*> a)
+{
+    int f = 0;
+    char* name2 = new char[50];
+    char* surname2 = new char[50];
+    list<Contact* >::iterator it;
+    cout << "Give a name : " << endl;
+    cin >> name2;
+    cout << "Give a surname : " << endl;
+    cin >> surname2;
+    for (it = (a).begin(); it != (a).end(); ++it)
+    {
+        char* pr = (*it)->getname();
+        char* pr1 = (*it)->getsurname();
+        if (strcmp(pr, name2) == 0 && strcmp(pr1, surname2) == 0)
+        {
+            cout << "----------------------------" << endl;
+            cout << "Details of specific contact " << endl;
+            (*it)->display();
+            cout << "----------------------------" << endl;
+            f = 1;
+            break;
+        }
+    }
+    if (f == 0)
+        cout << "Dont found the contact with this details" << endl;
+    delete[] name2;
+    delete[] surname2;
 }

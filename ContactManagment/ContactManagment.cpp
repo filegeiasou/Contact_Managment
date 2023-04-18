@@ -9,6 +9,13 @@ int main()
 {
     list <Contact* > a,b;
     int flag = 0 ,flag3=0;
+    char* name = new char[50];
+    char* name2 = new char[50];
+    char* surname = new char[50];
+    char* phone = new char[10];
+    char* name3 = new char[50];
+    char* surname4 = new char[50];
+    char* surname2 = new char[50];
     cout << "Contact Managment!" << endl;
     createlist(&a);
     while (flag != 4)
@@ -18,13 +25,10 @@ int main()
         cin >> flag;
         if (flag == 1)
         {
-            char* name = new char[50];
             cout << "Give a name : " << endl;
             cin >> name;
-            char* surname = new char[50];
             cout << "Give a surname : " << endl;
             cin >> surname;
-            char* phone = new char[10];
             cout << "Give a phone : " << endl;
             cin >> phone;
             cout << "Do you want to add more informations ? [Y/N]" << endl;
@@ -32,13 +36,13 @@ int main()
             cin >> epil;
             ifstream fp2;
             fp2.open("contacts.txt");
-            char* name3 = new char[50];
             while (!fp2.eof())
             {
                 fp2.getline(name3, 50);
-                if (strcmp(name, name3) == 0)
+                fp2.getline(surname4, 50);
+                if (strcmp(name, name3) == 0 && strcmp(surname,surname4)==0)
                 {
-                    cout << "Same";
+                    cout << "Same" << endl;
                     flag3 = 1;
                     break;
                 }
@@ -73,23 +77,29 @@ int main()
         }
         else if (flag == 3)
         {
+            int f = 0;
             list<Contact* >::iterator it;
-            char* name = new char[50];
             cout << "Give a name : " << endl;
-            cin >> name;
+            cin >> name2;
+            cout << "Give a surname : " << endl;
+            cin >> surname2;
             for (it = a.begin(); it != a.end(); ++it)
             {
                 char* pr = (*it)->getname();
-                if (strcmp(pr, name)==0)
+                char* pr1 = (*it)->getsurname();
+                if (strcmp(pr, name2)==0 && strcmp(pr1,surname2)==0)
                 {
+                    cout << "You delete a contact " << endl;
                     a.erase(it);
+                    f = 1;
                     break;
                 }
             }
-            cout << "You delete a contact " << endl;
             save(a);
             a.clear();
             createlist(&a);
+            if (f == 0)
+                cout << "You can not delete this contact because it not exists" << endl;
         }
         else if (flag == 2)
         {
@@ -108,6 +118,13 @@ int main()
 
     }
     cout << "Bye" << endl;
+    delete[] name;
+    delete[] surname;
+    delete[] name2;
+    delete[] surname2;
+    delete[] name3;
+    delete[] surname4;
+    delete[] phone;
     return 0;
 }
 
@@ -147,4 +164,7 @@ void createlist(list <Contact*> *a)
         }
     }
     fp.close();
+    delete[] name2;
+    delete[] surname2;
+    delete[] phone2;
 }

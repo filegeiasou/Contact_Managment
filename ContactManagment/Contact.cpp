@@ -53,3 +53,8 @@ char * Contact::getname()
 {
 	return this->first_name;
 }
+
+char* Contact::getsurname()
+{
+	return this->surname;
+}

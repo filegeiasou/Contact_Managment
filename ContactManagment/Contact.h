@@ -15,6 +15,7 @@ class Contact
 		Contact( char* , char*,  char*);
 		friend ostream& operator << (ostream&, const Contact&);
 		char* getname();
+		char* getsurname();
 		void display();
 		~Contact();
 };

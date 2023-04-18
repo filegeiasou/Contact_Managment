@@ -125,6 +125,7 @@ int main()
     delete[] name3;
     delete[] surname4;
     delete[] phone;
+    a.clear();
     return 0;
 }
 
